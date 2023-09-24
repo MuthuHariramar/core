@@ -1,0 +1,45 @@
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'favicon.png' %}" rel="icon" type="image/png">
+    <title>Home</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'assets/css/icons.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/uikit.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/tailwind.css' %}">
+</head>
+
+<body>
+
+            <header>
+                <div class="header_inner">
+                    <form action="/search" method="POST">
+                    {%csrf_token%}
+                        <!-- Logo -->
+                        <div id="logo" class=" uk-hidden@s">
+                            <a href="home.html">
+                                <b><h1 style="text-transform: uppercase;">Planet Clean</h1></b>
+                            </a>
+                        </div>
+                                                <div class="header_search" >
+                            <input type="text" name="username" placeholder="Search for username..">&nbsp;&nbsp;
+                            
+                            <button type="submit" style="display: -webkit-inline-flex">Search</button>
+                        </div>
+                    </form>
+                </div>
+            </header>
+            {% for users in username_profile_list %}
+            <section>
+                <a href="/profile/{{users.user}}"><img src="{{users.profileimg.url}}" style="height: 100px; width: 100px;"></a>
+                    <div class="box" style="width: 800px; height: 200px; color: black; background-color: azure; align-content: center; align-items: center; align-content: center; ">
+                        <a href="/profile/{{users.user}}"><h1>@{{users.user}}</h1></a><h1>@{{users.location}}</h1><h1>@{{users.bio}}</h1>
+                    </div>
+            </section>
+            {%endfor%}
+    
+</body>
+</html>
